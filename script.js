@@ -12,50 +12,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const ipAddressInput = document.getElementById('ip-address');
     const portInput = document.getElementById('port');
     const shellTypeSelect = document.getElementById('shell-type');
-    const encoding
+    const encodingSelect = document.getElementById('encoding');
+    const themeToggle = document.getElementById('theme-toggle');
     
-    // Add button animation for all buttons with enhanced effects
+    // Theme toggle functionality
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+            }
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+    }
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+    }
+    
+    // Add button animation for all buttons
     const buttons = document.querySelectorAll('.btn, .btn-icon-only');
     buttons.forEach(button => {
         button.addEventListener('mousedown', () => {
             button.style.transform = 'scale(0.95)';
-            button.style.boxShadow = '0 0 5px var(--primary-glow)';
         });
         
         button.addEventListener('mouseup', () => {
             button.style.transform = '';
-            button.style.boxShadow = '';
         });
         
         button.addEventListener('mouseleave', () => {
             button.style.transform = '';
-            button.style.boxShadow = '';
         });
-        
-        // Add hover effect with ripple
-        button.addEventListener('mouseover', function(e) {
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple-effect');
-            
-            const x = e.clientX - e.target.getBoundingClientRect().left;
-            const y = e.clientY - e.target.getBoundingClientRect().top;
-            
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-    
-    // Debug the theme toggle
-    console.log("Theme toggle initialized");
-    themeToggle.addEventListener('click', function(e) {
-        console.log("Theme toggle clicked");
-        console.log("Current classes:", document.body.className);
     });
     
     // Generate shell code
@@ -196,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return { shellCode, listenerCommand };
     }
-    
-    // Create background animation with enhanced effects
+
+    // Create background animation
     createBackgroundAnimation();
 });
 
@@ -205,30 +199,18 @@ document.addEventListener('DOMContentLoaded', function() {
 function createBackgroundAnimation() {
     const background = document.querySelector('.background');
     
-    // Create animated particles with enhanced effects
+    // Create animated particles
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
         // Random properties for particles
-        const size = Math.random() * 4 + 1;
+        const size = Math.random() * 3 + 1;
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
         const delay = Math.random() * 5;
         const duration = Math.random() * 10 + 10;
         const opacity = Math.random() * 0.5 + 0.1;
-        
-        // Random particle types
-        const particleType = Math.floor(Math.random() * 3);
-        let particleClass = 'particle';
-        
-        if (particleType === 1) {
-            particleClass += ' particle-square';
-        } else if (particleType === 2) {
-            particleClass += ' particle-triangle';
-        }
-        
-        particle.className = particleClass;
         
         // Apply styles
         particle.style.width = `${size}px`;
@@ -244,7 +226,7 @@ function createBackgroundAnimation() {
     }
 }
 
-// Add CSS for notification, particles, and ripple effect
+// Add CSS for notification and particles
 const style = document.createElement('style');
 style.textContent = `
     .notification {
@@ -258,7 +240,6 @@ style.textContent = `
         transition: transform 0.3s ease;
         z-index: 1000;
         box-shadow: 0 5px 15px var(--shadow-color);
-        backdrop-filter: blur(5px);
     }
     
     .notification.show {
@@ -298,16 +279,6 @@ style.textContent = `
         opacity: 0.3;
         animation: float linear infinite;
         box-shadow: 0 0 5px var(--primary-glow);
-        z-index: -1;
-    }
-    
-    .particle-square {
-        border-radius: 2px;
-        transform: rotate(45deg);
-    }
-    
-    .particle-triangle {
-        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
     
     @keyframes float {
