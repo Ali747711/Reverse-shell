@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShell Generator | Educational Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <meta name="description" content="An educational tool for cybersecurity students to learn about reverse shells in a controlled environment">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="cyber-text">Cyber</span>Shell Generator</h1>
+            <p class="subtitle">Educational Tool for Cybersecurity Students</p>
+        </div>
+
+        <div class="disclaimer">
+            <div class="disclaimer-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="disclaimer-text">
+                <h3>Educational Purposes Only</h3>
+                <p>This tool is designed strictly for educational purposes to help cybersecurity students understand network security concepts in controlled environments. Always practice ethical hacking and obtain proper authorization before testing any security techniques.</p>
+            </div>
+        </div>
+
+        <div class="config-panel">
+            <div class="input-group">
+                <label for="ip-address">Listener IP Address:</label>
+                <input type="text" id="ip-address" placeholder="e.g., 192.168.1.10">
+            </div>
+            <div class="input-group">
+                <label for="port">Listener Port:</label>
+                <input type="number" id="port" placeholder="e.g., 4444" min="1" max="65535">
+            </div>
+            <div class="input-group">
+                <label for="shell-type">Shell Type:</label>
+                <select id="shell-type">
+                    <option value="bash">Bash</option>
+                    <option value="powershell">PowerShell</option>
+                    <option value="python">Python</option>
+                    <option value="perl">Perl</option>
+                    <option value="php">PHP</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="netcat">Netcat</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="encoding">Encoding (Optional):</label>
+                <select id="encoding">
+                    <option value="none">None</option>
+                    <option value="base64">Base64</option>
+                    <option value="url">URL Encoding</option>
+                </select>
+            </div>
+
+            <button id="generate-btn" class="btn">
+                <span class="btn-text">Generate Shell</span>
+                <span class="btn-icon"><i class="fas fa-terminal"></i></span>
+            </button>
+        </div>
+
+        <div class="result-panel hidden" id="result-panel">
+            <h2>Generated Shell Code:</h2>
+            <div class="code-container">
+                <pre id="shell-code">// Generated shell code will appear here</pre>
+                <button id="copy-btn" class="btn-icon-only tooltip" data-tooltip="Copy to clipboard">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            
+            <div class="listener-instructions">
+                <h3>Listener Setup:</h3>
+                <pre id="listener-command">// Listener command will appear here</pre>
+                <button id="copy-listener-btn" class="btn-icon-only tooltip" data-tooltip="Copy to clipboard">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="education-section">
+            <h2>Learning Resources</h2>
+            <div class="resource-cards">
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-book"></i></div>
+                    <h3>What is a Reverse Shell?</h3>
+                    <p>A reverse shell is a type of shell in which the target machine initiates a connection back to the attacker's machine, providing command execution capabilities.</p>
+                </div>
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Defensive Measures</h3>
+                    <p>Learn how to detect and prevent reverse shell attacks with proper network monitoring, egress filtering, and application security.</p>
+                </div>
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Ethical Practice</h3>
+                    <p>Always practice in controlled environments, obtain proper authorization, and follow responsible disclosure when finding vulnerabilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Created for educational purposes only | <span id="current-year"></span></p>
+            <p>Not to be used for unauthorized system access</p>
+        </footer>
+    </div>
+
+    <div class="background">
+        <div class="grid"></div>
+        <div class="dots"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
