@@ -12,21 +12,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const ipAddressInput = document.getElementById('ip-address');
     const portInput = document.getElementById('port');
     const shellTypeSelect = document.getElementById('shell-type');
-    const encodingSelect = document.getElementById('encoding');
+    const encoding
     
-    // Add button animation for all buttons
+    // Add button animation for all buttons with enhanced effects
     const buttons = document.querySelectorAll('.btn, .btn-icon-only');
     buttons.forEach(button => {
         button.addEventListener('mousedown', () => {
             button.style.transform = 'scale(0.95)';
+            button.style.boxShadow = '0 0 5px var(--primary-glow)';
         });
         
         button.addEventListener('mouseup', () => {
             button.style.transform = '';
+            button.style.boxShadow = '';
         });
         
         button.addEventListener('mouseleave', () => {
             button.style.transform = '';
+            button.style.boxShadow = '';
+        });
+        
+        // Add hover effect with ripple
+        button.addEventListener('mouseover', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            
+            const x = e.clientX - e.target.getBoundingClientRect().left;
+            const y = e.clientY - e.target.getBoundingClientRect().top;
+            
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
         });
     });
     
@@ -169,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return { shellCode, listenerCommand };
     }
     
-    // Create background animation
+    // Create background animation with enhanced effects
     createBackgroundAnimation();
 });
 
@@ -177,18 +198,30 @@ document.addEventListener('DOMContentLoaded', function() {
 function createBackgroundAnimation() {
     const background = document.querySelector('.background');
     
-    // Create animated particles
+    // Create animated particles with enhanced effects
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
         // Random properties for particles
-        const size = Math.random() * 3 + 1;
+        const size = Math.random() * 4 + 1;
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
         const delay = Math.random() * 5;
         const duration = Math.random() * 10 + 10;
         const opacity = Math.random() * 0.5 + 0.1;
+        
+        // Random particle types
+        const particleType = Math.floor(Math.random() * 3);
+        let particleClass = 'particle';
+        
+        if (particleType === 1) {
+            particleClass += ' particle-square';
+        } else if (particleType === 2) {
+            particleClass += ' particle-triangle';
+        }
+        
+        particle.className = particleClass;
         
         // Apply styles
         particle.style.width = `${size}px`;
@@ -204,7 +237,7 @@ function createBackgroundAnimation() {
     }
 }
 
-// Add CSS for notification and particles
+// Add CSS for notification, particles, and ripple effect
 const style = document.createElement('style');
 style.textContent = `
     .notification {
@@ -212,12 +245,13 @@ style.textContent = `
         top: 20px;
         right: 20px;
         background: var(--panel-bg);
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 1rem;
         transform: translateX(150%);
         transition: transform 0.3s ease;
         z-index: 1000;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 5px 15px var(--shadow-color);
+        backdrop-filter: blur(5px);
     }
     
     .notification.show {
@@ -257,6 +291,16 @@ style.textContent = `
         opacity: 0.3;
         animation: float linear infinite;
         box-shadow: 0 0 5px var(--primary-glow);
+        z-index: -1;
+    }
+    
+    .particle-square {
+        border-radius: 2px;
+        transform: rotate(45deg);
+    }
+    
+    .particle-triangle {
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
     
     @keyframes float {
@@ -265,6 +309,22 @@ style.textContent = `
         }
         100% {
             transform: translateY(-100vh) rotate(360deg);
+        }
+    }
+    
+    .ripple-effect {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple {
+        to {
+            transform: scale(2.5);
+            opacity: 0;
         }
     }
 `;
