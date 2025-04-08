@@ -51,6 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Debug the theme toggle
+    console.log("Theme toggle initialized");
+    themeToggle.addEventListener('click', function(e) {
+        console.log("Theme toggle clicked");
+        console.log("Current classes:", document.body.className);
+    });
+    
     // Generate shell code
     generateBtn.addEventListener('click', function() {
         const ipAddress = ipAddressInput.value.trim();
