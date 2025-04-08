@@ -96,6 +96,7 @@ body {
     transition: all 0.3s ease;
     overflow: hidden;
     box-shadow: 0 0 10px var(--primary-glow);
+    outline: none;
 }
 
 .theme-toggle::before {
@@ -121,13 +122,17 @@ body {
     height: 20px;
     border-radius: 50%;
     background-color: var(--primary-color);
-    transition: transform 0.3s ease;
     z-index: 2;
     box-shadow: 0 0 5px var(--primary-glow);
+    transition: transform 0.3s ease;
 }
 
 body.light-mode .toggle-thumb {
     transform: translateX(30px);
+}
+
+body.dark-mode .toggle-thumb {
+    transform: translateX(0);
 }
 
 .moon-icon, .sun-icon {
