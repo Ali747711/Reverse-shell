@@ -7,10 +7,22 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <meta name="description" content="An educational tool for cybersecurity students to learn about reverse shells in a controlled environment">
+    <meta name="theme-color" content="#0a0a15">
 </head>
-<body>
+<body class="dark-mode">
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon moon-icon"></i>
+            <i class="fas fa-sun sun-icon"></i>
+            <div class="toggle-thumb"></div>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="header">
+            <div class="logo">
+                <i class="fas fa-terminal logo-icon"></i>
+            </div>
             <h1><span class="cyber-text">Cyber</span>Shell Generator</h1>
             <p class="subtitle">Educational Tool for Cybersecurity Students</p>
         </div>
